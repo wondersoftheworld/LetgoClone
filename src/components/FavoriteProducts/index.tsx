@@ -29,7 +29,7 @@ function Index() {
         </View>
       </View>
       {/* Render Favorite Products */}
-      <ScrollView bounces={true} horizontal={true}>
+      <ScrollView bounces={true} horizontal={true} showsHorizontalScrollIndicator={false}>
       {products.map((item) => {
           return <FavoriteProductItem  prodType='Favorite' key={item.id} product={item} />;
         })}
