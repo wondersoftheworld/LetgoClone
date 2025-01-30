@@ -20,7 +20,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingVertical: 3,
         paddingHorizontal: 20
-      }
+      },
+      main:{
+        width:width*0.46,
+        height:width*0.46,
+        alignItems:'center',
+    },
+    mainView:{
+        width:width*0.43,
+        height:width*0.43,
+    },
+    mainImg:{
+        width:width*0.43,
+        height:width*0.43,
+        borderRadius:12
+    }
       
 })
 

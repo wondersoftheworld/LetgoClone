@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         flexDirection:'row',
         alignItems:'center',
-        marginBottom:11
+        marginBottom:11,
+        marginRight:'4%'
     },
     topicTitle:{
         fontWeight:'bold',
