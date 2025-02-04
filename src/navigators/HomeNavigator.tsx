@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
+import CategoryFilterScreen from '../screens/CategoryFilterScreen';
 import { Text, TextInput, TouchableOpacity, SafeAreaView,Image } from 'react-native';
 
 
@@ -51,6 +52,17 @@ function HomeNavigator() {
             },
           }}
         />
+        <Stack.Screen
+          name="CategoryFiltering"
+          component={CategoryFilterScreen}
+          options={{
+            header: () => {
+              return <MainHeaderComponent />;
+            },
+          }}
+        />
+        
+
       </Stack.Navigator>
     );
   }

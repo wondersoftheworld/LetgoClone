@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, TouchableOpacity, Image, Text } from "react-native"
 import categoriesData from "../../../assets/categories"
 import { Category } from '../../models'
+import { useNavigation } from '@react-navigation/native'
 import styles from "./styles"
 function index() {
     const [categories, setCategories] = useState<Category[]>([])
-
+    const navigation = useNavigation()
     useEffect(() => {
         setCategories(categoriesData);
         return () => {
@@ -21,7 +22,7 @@ function index() {
             style={styles.scrollStyle}
         >
             {categories.map((item: Category) => (
-                <TouchableOpacity key={item.id} style={styles.center}>
+                <TouchableOpacity onPress={() => navigation.navigate("CategoryFiltering")} key={item.id} style={styles.center}>
                     <Image source={item.src} style={styles.image} />
                     <Text style={{ fontSize: 11, color: "#767575", fontWeight: "bold" }}>
                         {item.name}
