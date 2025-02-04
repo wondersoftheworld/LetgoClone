@@ -9,6 +9,7 @@ import {
   AntDesign,
   FontAwesome,
 } from "@expo/vector-icons";
+import PostNavigator from "./PostNavigator";
 const Tab = createBottomTabNavigator();
 function RootNavigator() {
   const CustomTabBarButton = ({  }) => {
@@ -102,7 +103,7 @@ function RootNavigator() {
       />
       <Tab.Screen
         name="İlanlarım"
-        component={HomeNavigator}
+        component={PostNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <AntDesign name="appstore1" size={24} color={color} />
