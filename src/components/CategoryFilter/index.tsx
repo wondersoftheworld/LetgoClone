@@ -22,7 +22,7 @@ function index() {
             style={styles.scrollStyle}
         >
             {categories.map((item: Category) => (
-                <TouchableOpacity onPress={() => navigation.navigate("CategoryFiltering")} key={item.id} style={styles.center}>
+                <TouchableOpacity onPress={() => navigation.navigate("CategoryFiltering",{category:item})} key={item.id} style={styles.center}>
                     <Image source={item.src} style={styles.image} />
                     <Text style={{ fontSize: 11, color: "#767575", fontWeight: "bold" }}>
                         {item.name}
