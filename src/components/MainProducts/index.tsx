@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { Product } from "../../models";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
-import FavoriteProductItem from "../FavorideProductItem";
+import FavoriteProductItem from "../FavoriteProductItem";
 type mainProductsProps = {
   mainProducts: Product[];
   header: string;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import productassets from '../../../assets/products';
-import FavoriteProductItem from '../../components/FavorideProductItem';
+import FavoriteProductItem from '../FavoriteProductItem';
 import { Product } from '../../models/index';
 import styles from './styles';
 
