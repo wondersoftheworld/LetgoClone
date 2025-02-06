@@ -3,21 +3,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 import CategoryFilterScreen from '../screens/CategoryFilterScreen';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView,Image } from 'react-native';
-import { useNavigation} from "@react-navigation/native";
-import {FontAwesome5,Ionicons, Entypo} from '@expo/vector-icons'
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import { useNavigation, getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native";
+import { FontAwesome5, Ionicons, Entypo } from '@expo/vector-icons'
 
 
 const Stack = createStackNavigator();
-const MainHeaderComponent = ()=>{
-    return(
+const MainHeaderComponent = () => {
+  return (
     <SafeAreaView style={{
-        flexDirection: "row",
-        alignItems: "center",
-        width: "90%",
-        marginHorizontal: "5%",
-        marginBottom: 10,
-      }} > 
+      flexDirection: "row",
+      alignItems: "center",
+      width: "90%",
+      marginHorizontal: "5%",
+      marginBottom: 10,
+    }} >
       <TouchableOpacity>
         <Image
           style={{ width: 38, height: 38, borderRadius: 19 }}
@@ -74,19 +75,33 @@ const CategoryHeaderComponent = () => {
 };
 
 
-function HomeNavigator() {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            header: () => {
-              return <MainHeaderComponent />;
-            },
-          }}
-        />
-         <Stack.Screen
+function MyStack({ navigation, route }) {
+  const tabHiddenRoutes = ["ProductDetails"];
+  React.useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route);
+    console.log("Route Name is ", routeName)
+    if (tabHiddenRoutes.includes(routeName)) {
+      navigation.setOptions({ tabBarStyle: { display: 'none' } });
+    } else {
+      console.log("Aç ", routeName)
+      navigation.setOptions({ tabBarStyle: { display: 'true' } });
+    }
+  }, [navigation, route]);
+
+
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          header: () => {
+            return <MainHeaderComponent />;
+          },
+        }}
+      />
+      <Stack.Screen
         name="ProductDetails"
         component={ProductDetailsScreen}
         options={{
@@ -114,7 +129,18 @@ function HomeNavigator() {
           ),
           headerLeft: () => (
             <TouchableOpacity
-            
+              onPress={() => {
+                if (navigation.canGoBack()) {
+                  navigation.goBack();
+                } else {
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [{ name: "Ana Sayfa" }], // "Home" yerine "Ana Sayfa" yaz
+                    })
+                  );
+                }
+              }}
               style={{
                 marginLeft: 20,
                 backgroundColor: "rgba(0,0,0,0.5)",
@@ -133,20 +159,22 @@ function HomeNavigator() {
         }}
       />
 
-        <Stack.Screen
-          name="CategoryFiltering"
-          component={CategoryFilterScreen}
-          options={{
-            header: () => {
-              return <CategoryHeaderComponent />;
-            },
-          }}
-        />
-        
+      <Stack.Screen
+        name="CategoryFiltering"
+        component={CategoryFilterScreen}
+        options={{
+          header: () => {
+            return <CategoryHeaderComponent />;
+          },
+        }}
+      />
 
-      </Stack.Navigator>
-    );
-  }
-  
 
-export default HomeNavigator;
+    </Stack.Navigator>
+  );
+}
+
+
+export default function HomeNavigator({ navigation, route }) {
+  return <MyStack navigation={navigation} route={route} />
+}
