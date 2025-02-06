@@ -10,6 +10,7 @@ import {
   FontAwesome,
 } from "@expo/vector-icons";
 import PostNavigator from "./PostNavigator";
+import SohbetNavigator from "./SohbetNavigator";
 const Tab = createBottomTabNavigator();
 function RootNavigator() {
   const CustomTabBarButton = ({  }) => {
@@ -90,7 +91,7 @@ function RootNavigator() {
       />
       <Tab.Screen
         name="Sohbet"
-        component={HomeNavigator}
+        component={SohbetNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
